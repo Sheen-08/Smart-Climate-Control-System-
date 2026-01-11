@@ -1,7 +1,7 @@
 # Smart Climate Control System
 Digital Electronics Final Project, Sheen Handoo
 
-# Project overview
+# Project Overview
 For my final project, I built a Smart Climate Control System using a Raspberry Pi and a thermoelectric Peltier module. It senses temperature, decides whether to heat or cool, and uses power electronics (such as an H-bridge module) to drive the Peltier. Python code controls everything. This demonstrates embedded systems, digital logic, power control, and closed-loop feedback. 
 * Digital Notebook: https://docs.google.com/document/d/1hWb3qJW2UgFH1D-iUqKGLdJwvkiZwQifIboyYEuQp94/edit?tab=t.0 
 <div align="center">
@@ -73,7 +73,7 @@ else:
         rpwm.ChangeDutyCycle(0)
         lpwm.ChangeDutyCycle(0)
 ```
-Then, I am calling my function. In the ```cool``` state, using the line ```set_peltier_state("cool", 50)```, I am setting the motor driver to flow "forward" at 50% power and the Peltier gets cold. I am running this code for 20 seconds, using the line ```time.sleep(20)```. Next, I am using the ```heat``` mode. With the line ```set_peltier_state("heat", 50)```, I am setting the BTS7960 to flow "backward" at 50% power and the Peltier gets hot. I am running this code for 20 seconds, using the line ```time.sleep(20)```. Finally I am clearing all the ```rpwm``` and ```lpwm``` values, making the BTS7960 and therefore also the Peltier stop.
+Then, I am calling my function. In the ```cool``` state, using the line ```set_peltier_state("cool", 50)```, I am setting the motor driver to flow "forward" at 50% power and the Peltier gets cold. I am running this code for 20 seconds, specified by the line ```time.sleep(20)```. Next, I am using the ```heat``` mode. With the line ```set_peltier_state("heat", 50)```, I am setting the BTS7960 to flow "backward" at 50% power and the Peltier gets hot. I am running this code for 20 seconds, specified by the line ```time.sleep(20)```. Finally I am clearing all the ```rpwm``` and ```lpwm``` values, making the BTS7960 and therefore also the Peltier stop.
 ```python
 try:
     set_peltier_state("cool", 50)
@@ -88,7 +88,16 @@ finally:
     lpwm.stop()
 ```
 
-# Challenges
+# Challenges and Future Improvements
+I faced quite a few challenges throughout the process of making this project, all detailed in my [Digital Notebook](https://docs.google.com/document/d/1hWb3qJW2UgFH1D-iUqKGLdJwvkiZwQifIboyYEuQp94/edit?tab=t.0), but here are some of the main ones I faced and what I did to fix them. 
+* 
 
+# Help and Sources
+* Source 1: [US Department of Energy](https://www.energy.gov/energysaver/thermoelectric-coolers#:~:text=Thermoelectric%20cooling%20(TEC)%20is%20a%20different%20approach,conditioning%20*%20Cooled%20seating%20*%20Cooled%20coverings)
+* Source 2: [Science Direct](https://www.sciencedirect.com/topics/engineering/thermocouple)
+* Source 3: [BTS7960 Datasheet](https://www.infineon.com/assets/row/public/documents/10/57/infineon-bts7960-ds-en.pdf?folderId=db3a304412b407950112b408e8c900)
+* Gemini Ai - used to help me learn how to format a README file
+* I had a lot of help from other students with my project, especially Ethan Ferreira and Kiana Lee because I do not have much Python coding experience or any experience using Raspberry Pi, so I am very thankful for all their help.
+* I also got a lot of help from Mr. Marc-Aurele with my project and many technical details about it, so I am also very thankful to him for all his help.
 
-
+Sheen Handoo - 2025-2026 Digital Electronics - Westview High School
