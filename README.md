@@ -118,8 +118,7 @@ I faced quite a few challenges throughout the process of making this project, al
 * Source 2: [Science Direct](https://www.sciencedirect.com/topics/engineering/thermocouple)
 * Source 3: [BTS7960 Datasheet](https://www.infineon.com/assets/row/public/documents/10/57/infineon-bts7960-ds-en.pdf?folderId=db3a304412b407950112b408e8c900)
 * Gemini AI and [GitHub Docs](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)- used to help me learn how to format a README file
-* I had a lot of help from other students with my project, especially Ethan Ferreira and Kiana Lee because I do not have much Python coding experience or any experience using Raspberry Pi, so I am very thankful for all their help.
-* Thank you to Marcus Wong, William Lei, and Srikar Punnamaraju for your help in the troubleshooting process!
-* I also got a lot of help from Mr. Marc-Aurele with my project and many technical details about it, so I am also very thankful to him for all his help.
+* I had a lot of help from other students with my project, especially Ethan Ferreira and Kiana Lee because I do not have much Python coding experience or any experience using Raspberry Pi, so I am very thankful for all their help. Also, a big thank you to Marcus Wong, William Lei, and Srikar Punnamaraju for the help in my troubleshooting process.
+* Huge thanks to Mr. Marc-Aurele for all the technical expertise that helped me get this far in my project!
 
 Sheen Handoo - 2025-2026 Digital Electronics - Westview High School
