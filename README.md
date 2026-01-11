@@ -94,7 +94,7 @@ finally:
 ```
 ## Wiring Diagram
 <div align="left">
-  <img src="wiringDiragram.png" width="600">
+  <img src="wiringDiagram.png" width="600">
 </div>
 
 ## How to Run on Raspberry Pi
