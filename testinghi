@@ -47,7 +47,7 @@ try:
     # This will now correctly print "cool"
     set_peltier_state("heat", 50)
     time.sleep(20)
-    # This will now correctly print "cool"
+    # This will now correctly print "heat"
     print(A) 
 finally:
     rpwm.stop()
