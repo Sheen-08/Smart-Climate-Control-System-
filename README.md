@@ -9,7 +9,7 @@ For my final project, I built a Smart Climate Control System using a Raspberry P
 </div>
 
 ## Inspiration and Initial Brainstorm
-When coming up with a project, I was looking through my weather app for the next day and then I thought to myself, why not make a project based on temperature control. So I went with that idea and came up with a plan of having a fan on one side with a heater on the other of a box-like structure with a temperature sensor in the middle. After consulting others, I realized this idea was too simple, so after reaseard and help from Mr. Marc-Aurele, I was able to decide on using a Peltier device as my main control system and Thermocouples as my temperature sensors.
+When coming up with a project, I was looking through my weather app for the next day and then I thought to myself, why not make a project based on temperature control. So I went with that idea and came up with a plan of having a fan on one side with a heater on the other of a box-like structure with a temperature sensor in the middle. After consulting others, I realized this idea was too simple, so after research and help from Mr. Marc-Aurele, I was able to decide on using a Peltier device as my main control system and Thermocouples as my temperature sensors.
 
 ## Bill Of Materials and Part Descriptions
 * Raspberry Pi 4: Main controller of my project
@@ -24,7 +24,7 @@ When coming up with a project, I was looking through my weather app for the next
 
 ## Code
 The full code for this project can be found in ```testinghi```. This project was fully coded in Python.
-I imported two python libraries, which can be found below. The first one allows the code to "talk to the physical world" through the GPIO Pins on the Raspeberry Pi. The second one handles time-related taskes, like im my project, it controls for how long the Peltier can heat up/cool down for before changing the flow to make the opposite sides heat up/cool down.
+I imported two python libraries, which can be found below. The first one allows the code to "talk to the physical world" through the GPIO Pins on the Raspberry Pi. The second one handles time-related tasks, like in my project, it controls for how long the Peltier can heat up/cool down for before changing the flow to make the opposite sides heat up/cool down.
 ```python
 import RPi.GPIO as GPIO  
 import time              
@@ -81,12 +81,17 @@ try:
     # This will now correctly print "cool"
     set_peltier_state("heat", 50)
     time.sleep(20)
-    # This will now correctly print "cool"
+    # This will now correctly print "heat"
     print(A) 
 finally:
     rpwm.stop()
     lpwm.stop()
 ```
+## How to Run on Raspberry Pi
+1. Turn on your Raspberry Pi and open up ```Bash```
+2. I saved my code file as ```peltierCode.py``` in my Raspberry Pi (referenced in Github  as ```testinghi```) so in ```Bash```, or the terminal used in Raspberry Pi, type in ```cd /home/sheenh/Documents``` and hit enter. My file is stored in ```Documents``` that is why we need to navigate to the documents folder to find this code file.
+3. Now, before running the code, make sure all connections are correct and the power supply is turned to ```>5V``` else the Peltier won't have much of a temperature difference.
+4. Then, type in ```python3 peltierCode.py``` and hit enter to run the code.
 
 ## Challenges and Future Improvements
 I faced quite a few challenges throughout the process of making this project, all detailed in my [Digital Notebook](https://docs.google.com/document/d/1hWb3qJW2UgFH1D-iUqKGLdJwvkiZwQifIboyYEuQp94/edit?tab=t.0), but here are some of the main ones I faced.
@@ -96,7 +101,7 @@ I faced quite a few challenges throughout the process of making this project, al
     * We realized that the ```M-``` or "Motor ground" port on the BTS7960 didn't work, so we had to ground it through the Raspberry Pi.
 * Because my materials took so long to arrive and the setbacks with all the Peltier circuit and code problems we faced, I wasn't able to start working on testing the thermocouple along with its breakout board. While I had enough time to test the sensor itself, I didn't have time to read any signals or incorporate it into my final project.
 * Something I would change for next time would be to not only to finalize and order my materials early, but to also create a more realistic timeline of goals to finish per week and also a finalized structure for my project to "sit in" because I didn't think of that beforehand and my project is basically just a long circuit at the moment.
-* If I had more time, I would want to try and test and incorporate the Thermocouples into my project as well as fix and issue we weren't able to figure out with the Peltier (only the ```cool``` setting works and not the ```heat``` setting). Also, I would have liked to come up with some sort of a structure for the Peltier and Thermocouples to "sit in" to have some sort of a final product.
+* If I had more time, I would want to try and test and incorporate the Thermocouples into my project as well as fix an issue we weren't able to figure out with the Peltier (only the ```cool``` setting works and not the ```heat``` setting). Also, I would have liked to come up with some sort of a structure for the Peltier and Thermocouples to "sit in" to have some sort of a final product.
 
 ## Help and Sources
 * Source 1: [US Department of Energy](https://www.energy.gov/energysaver/thermoelectric-coolers#:~:text=Thermoelectric%20cooling%20(TEC)%20is%20a%20different%20approach,conditioning%20*%20Cooled%20seating%20*%20Cooled%20coverings)
