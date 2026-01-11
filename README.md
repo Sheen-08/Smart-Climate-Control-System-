@@ -65,7 +65,7 @@ elif direction == "heat":
         rpwm.ChangeDutyCycle(0)
         lpwm.ChangeDutyCycle(duty_cycle)
 ```
-Finally I am clearning all the pins and making all the voltages go down to ```0V``` making the Peltier turn off completely.
+Finally I am clearing all the pins and making all the voltages go down to ```0V``` making the Peltier turn off completely.
 ```python
 else:
         GPIO.output(REN_PIN, GPIO.LOW)
