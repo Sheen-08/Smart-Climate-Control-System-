@@ -3,6 +3,9 @@ Digital Electronics Final Project, Sheen Handoo
 
 # Project overview
 For my final project, I built a Smart Climate Control System using a Raspberry Pi and a thermoelectric Peltier module. It senses temperature, decides whether to heat or cool, and uses power electronics (such as an H-bridge module) to drive the Peltier. Python code controls everything. This demonstrates embedded systems, digital logic, power control, and closed-loop feedback. 
+<div align="center">
+  <img src="finalGithubPic.png" width="500">
+</div>
 
 # Inspiration and Initial Brainstorm
 When coming up with a project, I was looking through my weather app for the next day and then I thought to myself, why not make a project based on temperature control. So I went with that idea and came up with a plan of having a fan on one side with a heater on the other of a box-like structure with a temperature sensor in the middle. After consulting others, I realized this idea was too simple, so after reaseard and help from Mr. Marc-Aurele, I was able to decide on using a Peltier device as my main control system and Thermocouples as my temperature sensors.
