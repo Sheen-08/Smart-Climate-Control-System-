@@ -3,6 +3,7 @@ Digital Electronics Final Project, Sheen Handoo
 
 # Project overview
 For my final project, I built a Smart Climate Control System using a Raspberry Pi and a thermoelectric Peltier module. It senses temperature, decides whether to heat or cool, and uses power electronics (such as an H-bridge module) to drive the Peltier. Python code controls everything. This demonstrates embedded systems, digital logic, power control, and closed-loop feedback. 
+* Digital Notebook: https://docs.google.com/document/d/1hWb3qJW2UgFH1D-iUqKGLdJwvkiZwQifIboyYEuQp94/edit?tab=t.0 
 <div align="center">
   <img src="finalGithubPic.png" width="500">
 </div>
@@ -16,12 +17,78 @@ When coming up with a project, I was looking through my weather app for the next
     * <img width="360" height="178" alt="image" src="https://github.com/user-attachments/assets/5c0f767e-7736-4634-a8c6-25a8e00f1c54" />
 * Thermocouples: A thermocouple is a temperature sensor made of two dissimilar metals joined at a junction that generates a voltage proportional to the temperature difference between that point and a known "cold junction" reference. Because different metal combinations offer varying sensitivities and ranges—such as the versatile Type K, which is the type I used in my project—careful selection of probe type and insulation is essential for accurate physiological or industrial monitoring (Source 2). I used an amplifier breakout board to measure and see the signals recieved from the thermocouple in order to use it in my code and integrate it into my project.
     * <img width="335" height="150" alt="image" src="https://github.com/user-attachments/assets/77577539-3c4e-4293-a103-c3997222d4bb" />
-* BTS7960 43A (H-Bridge Module used in this project): The BTS 7960 is a compact, high-current motor driver that combines two power switches and an integrated controller into a single package, making it easy to connect directly to a microcontroller. It provides a highly efficient and safe solution for controlling motors by featuring built-in protections against issues like overheating and short circuits, while also reducing electromagnetic interference.
+* BTS7960 43A (H-Bridge Module used in this project): The BTS 7960 is a compact, high-current motor driver that combines two power switches and an integrated controller into a single package, making it easy to connect directly to a microcontroller. It provides a highly efficient and safe solution for controlling motors by featuring built-in protections against issues like overheating and short circuits, while also reducing electromagnetic interference. (Source 3)
 * Breadboard
 * Jumper Wires
 * Variable Power Supply
 
-# 
+# Code
+The full code for this project can be found in ```testinghi```. This project was fully coded in Python.
+I imported two python libraries, which can be found below. The first one allows the code to "talk to the physical world" through the GPIO Pins on the Raspeberry Pi. The second one handles time-related taskes, like im my project, it controls for how long the Peltier can heat up/cool down for before changing the flow to make the opposite sides heat up/cool down.
+```python
+import RPi.GPIO as GPIO  
+import time              
+```
+Next, I defined my PWM Pins and Enable pins. The ```RPWM``` and ```LPWM``` pins control the speed and direction of the BTS7960 motor driver while the ```REN``` and ```LEN``` pins act as safety switches for the motor. After that, I initialized my GPIO pins. The ```GPIO.BCM``` means that I am using Broadcom pin numbering instead of physical pin orders and ```GPIO.OUT``` means it is an output so the Pi will send voltage out of the motor driver. Then, I initialized my frequency and set it to power on and off 1000 times per second and started my ```lpwm``` and ```rpwm``` with a 0% duty cycle.
+```python
+RPWM_PIN = 18  # Right PWM (Controls speed/movement in one direction - right)
+LPWM_PIN = 19  # Left PWM (Controls speed/movement in the other direction - left)
+REN_PIN = 23   # Right Enable (Safety switch for Right side)
+LEN_PIN = 24   # Left Enable (Safety switch for Left side)
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(RPWM_PIN, GPIO.OUT)
+GPIO.setup(LPWM_PIN, GPIO.OUT)
+GPIO.setup(REN_PIN, GPIO.OUT)
+GPIO.setup(LEN_PIN, GPIO.OUT)
+
+frequency = 1000
+rpwm = GPIO.PWM(RPWM_PIN, frequency)
+lpwm = GPIO.PWM(LPWM_PIN, frequency)
+rpwm.start(0)
+lpwm.start(0)
+```
+After that, I defined my two states, ```cool``` and ```heat```.
+In the ```cool``` state, I am making current flow from the right side to the left side, making one side cold while the other one warm.
+```python
+if direction == "cool":
+        GPIO.output(REN_PIN, GPIO.HIGH)
+        GPIO.output(LEN_PIN, GPIO.LOW)
+        rpwm.ChangeDutyCycle(duty_cycle)
+        lpwm.ChangeDutyCycle(0)
+```
+In the ```heat``` state, I am making current flow from the left side to the right side, making the initially cold side warm while the initially warm side cold.
+```python
+elif direction == "heat":
+        GPIO.output(REN_PIN, GPIO.LOW)
+        GPIO.output(LEN_PIN, GPIO.HIGH)
+        rpwm.ChangeDutyCycle(0)
+        lpwm.ChangeDutyCycle(duty_cycle)
+```
+Finally I am clearning all the pins and making all the voltages go down to ```0V``` making the Peltier turn off completely.
+```python
+else:
+        GPIO.output(REN_PIN, GPIO.LOW)
+        GPIO.output(LEN_PIN, GPIO.LOW)
+        rpwm.ChangeDutyCycle(0)
+        lpwm.ChangeDutyCycle(0)
+```
+Then, I am calling my function. In the ```cool``` state, using the line ```set_peltier_state("cool", 50)```, I am setting the motor driver to flow "forward" at 50% power and the Peltier gets cold. I am running this code for 20 seconds, using the line ```time.sleep(20)```. Next, I am using the ```heat``` mode. With the line ```set_peltier_state("heat", 50)```, I am setting the BTS7960 to flow "backward" at 50% power and the Peltier gets hot. I am running this code for 20 seconds, using the line ```time.sleep(20)```. Finally I am clearing all the ```rpwm``` and ```lpwm``` values, making the BTS7960 and therefore also the Peltier stop.
+```python
+try:
+    set_peltier_state("cool", 50)
+    time.sleep(20)
+    # This will now correctly print "cool"
+    set_peltier_state("heat", 50)
+    time.sleep(20)
+    # This will now correctly print "cool"
+    print(A) 
+finally:
+    rpwm.stop()
+    lpwm.stop()
+```
+
+# Challenges
 
 
 
