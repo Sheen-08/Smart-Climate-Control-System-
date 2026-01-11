@@ -22,6 +22,11 @@ When coming up with a project, I was looking through my weather app for the next
 * Jumper Wires
 * Variable Power Supply
 
+## Code Block Diagram
+<div align="left">
+  <img src="codeBlockDiagram.png" width="300">
+</div>
+
 ## Code
 The full code for this project can be found in ```testinghi```. This project was fully coded in Python.
 I imported two python libraries, which can be found below. The first one allows the code to "talk to the physical world" through the GPIO Pins on the Raspberry Pi. The second one handles time-related tasks, like in my project, it controls for how long the Peltier can heat up/cool down for before changing the flow to make the opposite sides heat up/cool down.
@@ -87,6 +92,11 @@ finally:
     rpwm.stop()
     lpwm.stop()
 ```
+## Wiring Diagram
+<div align="left">
+  <img src="wiringDiragram.png" width="600">
+</div>
+
 ## How to Run on Raspberry Pi
 1. Turn on your Raspberry Pi and open up ```Bash```
 2. I saved my code file as ```peltierCode.py``` in my Raspberry Pi (referenced in Github  as ```testinghi```) so in ```Bash```, or the terminal used in Raspberry Pi, type in ```cd /home/sheenh/Documents``` and hit enter. My file is stored in ```Documents``` that is why we need to navigate to the documents folder to find this code file.
